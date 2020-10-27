@@ -1,0 +1,105 @@
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+--EXPERIMENT 12--
+--Implementation of various control structures using PL/SQL--
+
+
+SELECT*FROM Orders;
+
+SELECT Productcode,UnitPrice,Description,
+CASE WHEN UnitPrice > 15 THEN 'The price is greater than 15'
+WHEN UnitPrice = 15 THEN 'The price is 15'
+ELSE 'The price is under 15'
+END AS productText
+FROM products;
+
+SELECT*FROM products;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetProductLevel(
+    IN  pProductcode INT, 
+    OUT pProductLevel  VARCHAR(20))
+BEGIN
+    DECLARE credit DECIMAL(10,2) DEFAULT 0;
+
+    SELECT UnitPrice 
+    INTO credit
+    FROM products
+    WHERE Productcode = pProductcode;
+
+    IF credit > 13 THEN
+        SET pProductLevel = 'PLATINUM';
+    END IF;
+END$$
+
+
+DELIMITER ;
+
+SELECT 
+    Productcode, 
+    UnitPrice
+FROM 
+    products
+WHERE 
+    UnitPrice > 13
+ORDER BY 
+    UnitPrice DESC;
+
+CALL GetProductLevel(0, @level);
+SELECT @level;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE GetProductLevel2(
+    IN  pProductcode INT, 
+    OUT pProductLevel  VARCHAR(20))
+BEGIN
+    DECLARE credit DECIMAL DEFAULT 0;
+
+    SELECT creditLimit 
+    INTO credit
+    FROM customers
+    WHERE Productcode = pProductcoder;
+
+    IF credit > 13 THEN
+        SET pProductLevel = 'PLATINUM';
+    ELSE
+        SET pProductLevel = 'NOT PLATINUM';
+    END IF;
+END$$
+
+DELIMITER ;
+
+SELECT 
+    Productcode, 
+    UnitPrice
+FROM 
+    products
+WHERE 
+    UnitPrice <= 13
+ORDER BY 
+    Unitprice DESC;
+
+CALL GetProductLevel(9, @level);
+SELECT @level;
+
+DELIMITER $$
+CREATE FUNCTION smallestamt(rps INT)
+RETURNS INT 
+DETERMINISTIC
+BEGIN
+  DECLARE sml INT ;
+  SET sml = 100;
+  label1: WHILE rps < sml DO
+    RETURN rps;
+  END WHILE label1;
+  RETURN 1;
+END $$
+DELIMITER ;
+
+SELECT 
+  smallestamt(UnitPrice)
+FROM 
+  products;

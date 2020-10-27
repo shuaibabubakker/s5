@@ -1,0 +1,51 @@
+USE `bookstore`;
+DROP function IF EXISTS `stock_level`;
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+DELIMITER $$
+#------------------------------Functions in mysql------------------------------------
+
+USE `bookstore`$$
+CREATE FUNCTION `stock_level` (st int)
+RETURNS varchar(20)
+BEGIN
+ 
+   DECLARE levels varchar(20);
+
+   
+      IF st<=100 THEN
+        SET levels = 'LOW';
+
+      ELSEIF st > 100 AND st <= 300 THEN
+        SET levels = 'Moderate';
+
+      ELSE
+        SET st = 'HIGH';
+   END IF;
+
+
+RETURN levels;
+END$$
+
+DELIMITER ;
+SET GLOBAL log_bin_trust_function_creators = 0;
+select BOOK_ISBN,WAREHOUSE_code,stock_level(number) from stocks;
+
+
+#---------------------------Procedures in mysql------------------------------
+DELIMITER $$    
+CREATE PROCEDURE storage(
+    IN Page INT,
+    OUT count INT
+)
+BEGIN
+SELECT count(BOOK_ISBN) INTO count FROM stocks WHERE number >= Page;
+END; $$
+DELIMITER ;
+
+CALL storage(100, @count);
+SELECT @count;
+
+
+
+

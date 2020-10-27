@@ -1,0 +1,83 @@
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------INSERT FILE------
+Enter the file name : hello.txt
+Enter the Location(only root can exist) : main
+Enter the date of creation : 5/6/18
+Enter the size : 10
+DEFAULT values filed in rest of the fields
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------INSERT FILE------
+Enter the file name : Haha.img
+Enter the Location(only root can exist) : main
+Enter the date of creation : 6/6/18
+Enter the size : 10
+DEFAULT values filed in rest of the fields
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------INSERT FILE------
+Enter the file name : Haha.img
+Enter the Location(only root can exist) : Secondary
+Enter the date of creation : 7/7/18
+Enter the size : 1
+DEFAULT values filed in rest of the fields
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------DELETE FILE------
+Enter the file name : hello.txt
+Enter the folder name : main
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------INSERT FILE------
+Enter the file name : hello.txt
+Enter the Location(only root can exist) : Secondary
+Enter the date of creation : 5/6/18
+Enter the size : 10
+DEFAULT values filed in rest of the fields
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------INSERT FILE------
+Enter the file name : Haha.img
+Enter the Location(only root can exist) : Secondary
+Enter the date of creation : 3/4/18
+Enter the size : 10
+DEFAULT values filed in rest of the fields
+
+--Single level--
+1.Create File
+2.Delete File
+3.Search File
+4.Display
+Enter choice:
+------SEARCH FILE------
+Enter the file name : Haha.img

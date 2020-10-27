@@ -1,0 +1,22 @@
+00000  4B2006               JSUB    ARE    
+00003  4B200F               JSUB    PER    
+00006  3F2FFD    halt       J       halt    
+                  
+00009  03201E    ARE        LDA     BASE    
+0000C  23201E               MUL     HEIGHT    
+0000F  0F201E               STA     AREA    
+00012  4F0000               RSUB        
+                  
+00015  03200F    PER        LDA     SIDE    
+00018  1B200F               ADD     BASE    
+0001B  232006               MUL     TWO    
+0001E  0F2012               STA     PERIMETER    
+00021  4F0000               RSUB        
+                  
+00024  000002    TWO        WORD    2    
+00027  000003    SIDE       WORD    3    
+0002A  000005    BASE       WORD    5    
+0002D  000004    HEIGHT     WORD    4    
+00030  000000    AREA       RESW    1    
+00033  000000    PERIMETER  RESW    1    
+                  

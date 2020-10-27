@@ -1,0 +1,31 @@
+	JSUB	FINDAREA
+	JSUB	FINDPERIMETER
+halt	J	halt
+.
+.
+.	
+
+FINDAREA	LDA	BREADTH
+		MUL	LENGTH
+         	STA	AREA
+         	RSUB
+.
+.
+.
+FINDPERIMETER 	LDA	BREADTH	
+             	ADD	LENGTH
+             	MUL	TWO
+             	STA	PERIMETER
+             	RSUB
+.
+.
+.
+TWO	WORD	2
+ZERO	WORD	0
+ONE	WORD	1
+BREADTH	WORD	5
+LENGTH	WORD	10
+.
+.
+AREA RESW 1
+PERIMETER RESW 1

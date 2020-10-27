@@ -1,0 +1,99 @@
+#-----------------------------CASE STATEMENT-----------------------------------------
+USE `bookstore`;
+DROP function IF EXISTS `stock_level`;
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+DELIMITER $$
+USE `bookstore`$$
+CREATE FUNCTION `stock_level` (st int)
+RETURNS varchar(20)
+BEGIN
+ 
+   DECLARE levels varchar(20);
+
+   CASE 
+      WHEN st<=100 THEN
+        SET levels = 'LOW';
+
+      WHEN st > 100 AND st <= 300 THEN
+        SET levels = 'Moderate';
+
+      ELSE
+        SET st = 'HIGH';
+   END CASE;
+
+
+RETURN levels;
+END$$
+
+DELIMITER ;
+SET GLOBAL log_bin_trust_function_creators = 0;
+select BOOK_ISBN,WAREHOUSE_code,stock_level(number) from stocks;
+
+
+#----------------------------------ITERATATION--------------------------------------
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+DELIMITER //
+
+CREATE FUNCTION Factorial ( value INT )
+RETURNS INT
+
+BEGIN
+
+   DECLARE res INT;
+   DECLARE i INT;
+   DECLARE temp INT;
+
+   SET res = 1;
+   SET i=0;
+   SET temp = value;
+
+   label1: LOOP
+     SET res = res * temp;
+     SET i = i + 1;
+     SET temp = temp - 1;
+     IF i < value THEN
+       ITERATE label1;
+     END IF;
+     LEAVE label1;
+   END LOOP label1;
+
+   RETURN res;
+
+END; //
+DELIMITER ;
+SET GLOBAL log_bin_trust_function_creators = 0;
+
+SELECT Factorial(9);
+
+
+
+#----------------------------------WHILE LOOP-----------------------------------
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+DELIMITER //
+
+CREATE FUNCTION Sumn ( starting_value INT )
+RETURNS INT
+
+BEGIN
+
+   DECLARE i INT;
+   DECLARE sumn INT;
+
+   SET i = 0;
+   SET sumn = 0;
+
+   label1: WHILE i <= starting_value DO
+     SET sumn = sumn + i;
+     SET i = i + 1; 
+   END WHILE label1;
+
+   RETURN sumn;
+
+END; //
+
+DELIMITER ;
+SET GLOBAL log_bin_trust_function_creators = 0;
+SELECT Sumn(100);

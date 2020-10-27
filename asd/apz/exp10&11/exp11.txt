@@ -1,0 +1,32 @@
+---------------------------
+----------------------------
+----
+
+SELECT cus_id, cus_name FROM customer 
+UNION
+SELECT pro_id, pro_type FROM products;
+
+SELECT sale_amt, sale_type
+FROM sales
+  WHERE sale_amt<1999;
+
+SELECT cus_name
+FROM customer
+WHERE cus_id IN (
+  SELECT cus_id
+  FROM products
+  WHERE pro_type="cotton"
+  );
+
+SELECT cus_name.customer,customer.cus_mobile,products.pro_type
+FROM customer 
+INNER JOIN  products ON customer.cus_id = products.cud_id
+
+SELECT sales.sale_amt, user.user_name,
+FROM sales
+RIGHT JOIN user ON sales.user_id=user.user_id
+ORDER BY sales.sale_amt DESC;
+
+SELECT user.user_id,user.user_name, customer.cus_mobile, customer.cus_address
+FROM user 
+LEFT JOIN customer ON user.user_id = customer.user_id;

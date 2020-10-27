@@ -1,0 +1,126 @@
+--------------------------------------------------------
+--------------------------------------------------------
+--EXPERIMENT 13--
+--Creation of Procedures and Functions --
+
+DELIMITER $$
+
+CREATE PROCEDURE GetProductLevel(
+    IN  pProductcode INT, 
+    OUT pProductLevel  VARCHAR(20))
+BEGIN
+    DECLARE credit DECIMAL(10,2) DEFAULT 0;
+
+    SELECT UnitPrice 
+    INTO credit
+    FROM products
+    WHERE Productcode = pProductcode;
+
+    IF credit > 13 THEN
+        SET pProductLevel = 'PLATINUM';
+    END IF;
+END$$
+
+
+DELIMITER ;
+
+SELECT 
+    Productcode, 
+    UnitPrice
+FROM 
+    products
+WHERE 
+    UnitPrice > 13
+ORDER BY 
+    UnitPrice DESC;
+
+CALL GetProductLevel(0, @level);
+SELECT @level;
+
+DROP PROCEDURE GetProductLevel;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetProductLevel(
+    IN  pProductcode INT, 
+    OUT pProductLevel  VARCHAR(20))
+BEGIN
+    DECLARE credit DECIMAL DEFAULT 0;
+
+    SELECT creditLimit 
+    INTO credit
+    FROM customers
+    WHERE Productcode = pProductcoder;
+
+    IF credit > 13 THEN
+        SET pProductLevel = 'PLATINUM';
+    ELSE
+        SET pProductLevel = 'NOT PLATINUM';
+    END IF;
+END$$
+
+DELIMITER ;
+
+SELECT 
+    Productcode, 
+    UnitPrice
+FROM 
+    products
+WHERE 
+    UnitPrice <= 13
+ORDER BY 
+    Unitprice DESC;
+
+CALL GetProductLevel(9, @level);
+SELECT @level;
+ 
+DELIMITER //
+CREATE FUNCTION target(amount INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE amt INT;
+  SET amt=0;
+
+  label1: REPEAT
+    SET amt=amt+amount;
+  UNTIL amt>=1000
+  END REPEAT label1;
+
+  RETURN 1;
+END //
+DELIMITER ;
+
+SELECT target(sum(UnitPrice))
+FROM 
+  products;
+
+
+
+
+DELIMITER //
+CREATE FUNCTION getoffer(price INT)
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+  DECLARE offer VARCHAR(20);
+  IF price <= 5 THEN
+    SET offer = '5%';
+  ELSEIF price <= 10 THEN
+    SET offer = '10%';
+  ELSEIF price <= 15 THEN
+    SET offer = '15%';
+  ELSE 
+    SET offer = '20%';
+  END IF;
+  RETURN (offer);
+END //
+DELIMITER ;
+SHOW FUNCTION STATUS
+WHERE db = 'onlineflowerstore';
+
+SELECT 
+  Productcode,
+  getoffer(UnitPrice)
+FROM 
+  products;

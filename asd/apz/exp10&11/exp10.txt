@@ -1,0 +1,21 @@
+----------------------------
+-----------------------------
+--EXPERIMENT 10--
+
+
+SELECT * FROM 'customer'
+ORDER BY cus_name;
+
+SELECT * FROM 'sales'
+ORDER BY sale_amt DESC;
+
+SELECT COUNT(cus_id), cus_adress
+FROM customer
+GROUP BY cus_adress;
+
+SELECT SUM(sale_amt), sale_type
+FROM sales
+GROUP BY sale_type
+HAVING SUM(sale_amt)>1000;
+
+

@@ -1,0 +1,32 @@
+
+File created
+  File :hello.txt
+  Directory :main
+  Date created :2/3/18
+  permissions :R W X
+Directory :root 
+File created
+  File :ABC
+  Directory :sec
+  Date created :2/3/18
+  permissions :R W X
+Directory :root 
+File created
+  File :CDE
+  Directory :ABC
+  Date created :1/2/18
+  permissions :R W X
+Directory :main 
+Directory :sec 
+File deleted
+  File :hello.txt
+  Directory :main
+  Date created :2/3/18
+  permissions :R W X
+File Found
+Location: sec 
+Name: ABC 
+Size: 10kb 
+Date: 2/3/18
+Permissions:R W X
+Directory :root 
